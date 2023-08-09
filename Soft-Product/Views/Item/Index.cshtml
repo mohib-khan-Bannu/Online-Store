@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+<p>Add Items</p>
+<div class="row">
+    <div class="col-8">
+        <button class="btn btn-primary  m-2 p-2" id="additems">Add Items </button>
+    </div>
+    <div class="col-4">
+        <input class="form-control form-control-navbar  float-end m-1 " id="txtsearch" style="width:57%" type="search" placeholder="Search" aria-label="Search">
+    </div>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>ItemInStock</th>
+            <th>ExpireDate</th>
+            <th>CategoryId</th>
+            <th>Picture</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="ItemDataTable"></tbody>
+
+</table>
+
+
+
+<div id="ItemsModal" class="modal fade" data-bs-backdrop="static" role="dialog" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="text-info modal-title">Add Items</h1>
+                    <button class="close text-danger btn-defult" data-dismiss="modal">&times,</button>
+                </div>
+                <div class="modal-body" id="table_data">
+
+                    <div class="form-group">
+                        <label>Id</label>
+                        <input type="text" class=" form-control" id="ItemID" disabled="disabled" />
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="   form-control" id="name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" name="name" class="   form-control" id="price" />
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" name="name" class="   form-control" id="quantity" />
+                    </div>
+                    <div class="form-group">
+                        <label>ItemInStock</label>
+                        <input type="number" class=" form-control" id="itemInStock" />
+                    </div>
+                    <div class="form-group">
+                        <label>ExpireDate</label>
+                        <input type="date" class=" form-control" id="date" />
+                    </div>
+                    <div class="form-group">
+                        <label>CategoryId</label>
+
+                        @{
+                            <select id="categoryId" class="form-control">
+                                <option>Select Category</option>
+                                @if (ViewBag.CategoryList != null)
+                                {
+                                    @foreach (var item in ViewBag.CategoryList)
+                                    {
+                                        <option value="@item.Value">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        }
+                    </div>
+                    <div class=" form-group ">
+                        <div class="custom-file">
+                            <input type="file" id="fileUpload" onchange="readitemsURL(this);" class="fileUpload">
+
+                            <img src="~/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg" id="imgpt" style="width:100px; height: 100px; border: 1px solid red;" />
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary " onclick="AddItems();" id="additemdata">Add Item</button>
+                    <button class="btn btn-warning " onclick="UpdateItem();" style="display: none;" id="updateItem">Update</button>
+                    <button class="close text-danger btn-defult"   data-dismiss="modal" >Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Add the Bootstrap JavaScript files at the end of your body tag -->
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+<script src="~/js/ItemsJS.js"></script>
+

@@ -1,0 +1,14 @@
+﻿@using Soft_Product.Models.Extenstion;
+@{ 
+    int counter = Context.Session.GetComplexData<int>("CartCounter");
+}
+@if (counter == null)
+{
+    <a asp-action="ShopingCart" asp-controller="Cart" id="cartitem"></a>
+
+}
+else
+{
+<a asp-action="ShopingCart" asp-controller="Cart" id="cartitem"></a>
+
+}

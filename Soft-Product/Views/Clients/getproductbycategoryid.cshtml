@@ -1,0 +1,97 @@
+﻿
+@model IEnumerable<Soft_Product.Models.Item>
+@{
+
+    ViewData["Title"] = "getproductbycategoryid";
+    Layout = "~/Views/Shared/_Layout_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function AddtoCart(item) {
+        debugger
+        var itemid = $(item).attr("itemid");
+        formdata = new FormData();
+        formdata.append("Itemid", itemid);
+
+        $.ajax({
+           async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formdata,
+            url: '/Cart/Index',
+            success: function (data) {
+                debugger
+                if (data.success) {
+                    $("#cartitem").text(data.counter);
+                }
+            },
+            error: function () {
+                alert("There is some issue");
+            }
+
+        });
+    }
+</script>
+<section class="product_section layout_padding">
+    <div class="container">
+
+        <div class="heading_container heading_center">
+            <h2>
+                Our <span>products</span>
+            </h2>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="box">
+                        <div class="option_container">
+
+                            <div class="options">
+                                    <input type="button" name="AddtoCart" value="Add to Cart"  class="option1" itemid="@item.ItemId" id="btnaddtocart" onclick="AddtoCart(this)"  />
+                                <a href="" class="option2">
+                                    Buy Now
+                                </a>
+                            </div>
+                        </div>
+                        <div class="img-box">
+                            @if (item.Image != "")
+                            {
+                                <img src="~/@item.Image" />
+                                @*<img src="~/images/f2.png" style="height: 150px; width: 150px;" />*@
+
+                            }
+
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                @item.Name
+                            </h5>
+                            <h6>
+                                $@item.Price
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        </div>
+        <div class="btn-box">
+            <a href="">
+                View All products
+            </a>
+        </div>
+    </div>
+</section>
+<!-- end product section -->
+<!-- subscribe section -->
+
+<!-- end subscribe section -->
+<!-- client section -->
+
+<!-- end client section -->
+<!-- footer start -->
+
+   
